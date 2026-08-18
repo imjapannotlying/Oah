@@ -1,0 +1,68 @@
+-- Services
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create ScreenGui
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "CheatEngineMenu"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = PlayerGui
+
+-- Create Main Frame
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Size = UDim2.new(0, 250, 0, 180)
+MainFrame.Position = UDim2.new(0.5, -125, 0.5, -90)
+MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+MainFrame.BorderSizePixel = 0
+MainFrame.Active = true
+MainFrame.Draggable = true
+MainFrame.Parent = ScreenGui
+
+-- Create Title Label
+local TitleLabel = Instance.new("TextLabel")
+TitleLabel.Name = "TitleLabel"
+TitleLabel.Size = UDim2.new(1, 0, 0, 35)
+TitleLabel.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+TitleLabel.Text = "Control Panel"
+TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleLabel.TextSize = 16
+TitleLabel.Font = Enum.Font.SourceSansBold
+TitleLabel.Parent = MainFrame
+
+-- Create Feature Button
+local ToggleButton = Instance.new("TextButton")
+ToggleButton.Name = "ToggleButton"
+ToggleButton.Size = UDim2.new(0, 210, 0, 45)
+ToggleButton.Position = UDim2.new(0.5, -105, 0.5, -10)
+ToggleButton.BackgroundColor3 = Color3.fromRGB(180, 40, 40)
+ToggleButton.Text = "Status: DISABLED"
+ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleButton.TextSize = 14
+ToggleButton.Font = Enum.Font.SourceSans
+ToggleButton.Parent = MainFrame
+
+-- State Management
+local isEnabled = false
+
+-- Toggle Handler
+local function OnToggleClicked()
+	isEnabled = not isEnabled
+
+	if isEnabled then
+		ToggleButton.Text = "Status: ENABLED"
+		ToggleButton.BackgroundColor3 = Color3.fromRGB(40, 180, 40)
+		
+		-- Custom Execution Logic Here
+		print("Feature Enabled")
+	else
+		ToggleButton.Text = "Status: DISABLED"
+		ToggleButton.BackgroundColor3 = Color3.fromRGB(180, 40, 40)
+		
+		-- Custom Termination Logic Here
+		print("Feature Disabled")
+	end
+end
+
+ToggleButton.MouseButton1Click:Connect(OnToggleClicked)
